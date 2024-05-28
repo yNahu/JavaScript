@@ -1,0 +1,22 @@
+* {
+    margin: 10px;
+}
+main {
+    background-color: skyblue;
+    padding: 10px;
+}
+
+footer {
+    background-color: aliceblue;
+    font-weight: 700;
+    padding: 10px;
+}
+
+hr {
+    border-top: 2px solid orange !important;
+}
+.div-cotizar {
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
