@@ -3,32 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre entrega</title>
+    <title>Tienda de Ropa Online</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script defer src="js/main.js"></script>
 </head>
 <body>
     <header>
-        <h1>Espero te "Prendas"</h1>
-        <h2>Tienda online.</h2>
+        <h1>Tienda de Ropa</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#" id="cart">Carrito (0)</a></li>
+            </ul>
+        </nav>
     </header>
 
-<main>
-    <div>
-        <h3>Nuestra linea de ropa.</h3>
-        <ul>
-            <li>🩳 Bermuda playera</li>
-            <li>👕 Remera casual</li>
-            <li>👖 Pantalon de jean</li>
-            <li>👔 Camisa Office</li>
-        </ul>
-    </div>
-</main>
-    <div>Ejecuta la funcion preguntarPrecios() en la consola js</div>
-<footer>
-    <br>
-    <p>Estudiante: Nahuel Fernandez</p>
-</footer>
+    <main>
+        <h2>Nuestros Productos</h2>
+        <input type="text" id="search-bar" placeholder="Buscar productos...">
+        
+        <div id="filters">
+            <button data-category="all">Todos</button>
+            <button data-category="pantalones">Pantalones</button>
+            <button data-category="buzos">Buzos</button>
+            <button data-category="camperas">Camperas</button>
+            <button data-category="remeras">Remeras</button>
+            <button data-category="shorts">Shorts</button>
+        </div>
+        
+        <div class="product-list" id="product-list">
+            <!-- Productos serán añadidos aquí dinámicamente -->
+        </div>
 
+        <h3>Añadir Nuevo Producto</h3>
+        <form id="add-product-form">
+            <input type="text" id="product-name" placeholder="Nombre del producto" required>
+            <input type="number" id="product-price" placeholder="Precio" required>
+            <select id="product-category" required>
+                <option value="pantalones">Pantalones</option>
+                <option value="buzos">Buzos</option>
+                <option value="camperas">Camperas</option>
+                <option value="remeras">Remeras</option>
+                <option value="shorts">Shorts</option>
+            </select>
+            <button type="submit">Añadir Producto</button>
+        </form>
+
+        <h3>Lista de Productos</h3>
+        <div id="admin-product-list">
+            <!-- Lista modificable de productos -->
+        </div>
+    </main>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Pago</h2>
+            <div id="cart-items"></div>
+            <p>Total: $<span id="total-amount">0.00</span></p>
+            <button id="pay-button">Pagar</button>
+        </div>
+    </div>
+
+    <script src="/js/database.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
