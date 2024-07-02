@@ -11,49 +11,67 @@
         <h1>Tienda de Ropa</h1>
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
                 <li><a href="#" id="cart">Carrito (0)</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h2>Nuestros Productos</h2>
-        <input type="text" id="search-bar" placeholder="Buscar productos...">
-        
-        <div id="filters">
-            <button data-category="all">Todos</button>
-            <button data-category="pantalones">Pantalones</button>
-            <button data-category="buzos">Buzos</button>
-            <button data-category="camperas">Camperas</button>
-            <button data-category="remeras">Remeras</button>
-            <button data-category="shorts">Shorts</button>
-        </div>
-        
-        <div class="product-list" id="product-list">
-            <!-- Productos serán añadidos aquí dinámicamente -->
-        </div>
+        <section id="inicio">
+            <h2>Bienvenidos a nuestra Tienda de Ropa</h2>
+            <p>Descubre nuestros productos y ofertas exclusivas.</p>
+        </section>
 
-        <h3>Añadir Nuevo Producto</h3>
-        <form id="add-product-form">
-            <input type="text" id="product-name" placeholder="Nombre del producto" required>
-            <input type="number" id="product-price" placeholder="Precio" required>
-            <select id="product-category" required>
-                <option value="pantalones">Pantalones</option>
-                <option value="buzos">Buzos</option>
-                <option value="camperas">Camperas</option>
-                <option value="remeras">Remeras</option>
-                <option value="shorts">Shorts</option>
-            </select>
-            <button type="submit">Añadir Producto</button>
-        </form>
+        <section id="productos">
+            <h2>Nuestros Productos</h2>
+            <input type="text" id="search-bar" placeholder="Buscar productos...">
+        
+            <div id="filters">
+                <button data-category="all">Todos</button>
+                <button data-category="pantalones">Pantalones</button>
+                <button data-category="buzos">Buzos</button>
+                <button data-category="camperas">Camperas</button>
+                <button data-category="remeras">Remeras</button>
+                <button data-category="shorts">Shorts</button>
+            </div>
+        
+            <div class="product-list" id="product-list">
+                <!-- Productos serán añadidos aquí dinámicamente -->
+            </div>
+        
+            <h3>Añadir Nuevo Producto</h3>
+            <form id="add-product-form">
+                <input type="text" id="product-name" placeholder="Nombre del producto" required>
+                <input type="number" id="product-price" placeholder="Precio" required>
+                <select id="product-category" required>
+                    <option value="pantalones">Pantalones</option>
+                    <option value="buzos">Buzos</option>
+                    <option value="camperas">Camperas</option>
+                    <option value="remeras">Remeras</option>
+                    <option value="shorts">Shorts</option>
+                </select>
+                <button type="submit">Añadir Producto</button>
+            </form>
+        
+            <h3>Lista de Productos</h3>
+            <div id="admin-product-list">
+                <!-- Lista modificable de productos -->
+            </div>
+        </section>
 
-        <h3>Lista de Productos</h3>
-        <div id="admin-product-list">
-            <!-- Lista modificable de productos -->
-        </div>
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <form id="contact-form">
+                <input type="text" id="first-name" placeholder="Nombre" required>
+                <input type="text" id="last-name" placeholder="Apellido" required>
+                <input type="email" id="email" placeholder="Correo electrónico" required>
+                <input type="tel" id="phone" placeholder="Teléfono" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
     </main>
 
     <div id="payment-modal" class="modal">

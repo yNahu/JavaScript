@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function loadProducts(productList) {
     const productListDiv = document.getElementById('product-list');
     productListDiv.innerHTML = '';
-    productList.forEach(product => {
+    productList.forEach(({ id, name, price }) => {
         const productDiv = document.createElement('div');
         productDiv.className = 'product';
         productDiv.innerHTML = `
-            <img src="https://via.placeholder.com/150?text=${product.name}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>Precio: $${product.price.toFixed(2)}</p>
-            <button onclick="addToCart(${product.id})">Agregar al Carrito</button>
+            <img src="https://via.placeholder.com/150?text=${name}" alt="${name}">
+            <h3>${name}</h3>
+            <p>Precio: $${price.toFixed(2)}</p>
+            <button onclick="addToCart(${id})">Agregar al Carrito</button>
         `;
         productListDiv.appendChild(productDiv);
     });
@@ -49,11 +49,11 @@ function showCart() {
     const cartItems = document.getElementById('cart-items');
     cartItems.innerHTML = '';
     let total = 0;
-    cart.forEach((item, index) => {
+    cart.forEach(({ name, price }, index) => {
         const itemDiv = document.createElement('div');
-        itemDiv.innerHTML = `${item.name} - $${item.price.toFixed(2)} <button onclick="removeFromCart(${index})">Eliminar</button>`;
+        itemDiv.innerHTML = `${name} - $${price.toFixed(2)} <button onclick="removeFromCart(${index})">Eliminar</button>`;
         cartItems.appendChild(itemDiv);
-        total += item.price;
+        total += price;
     });
     document.getElementById('total-amount').textContent = total.toFixed(2);
     modal.style.display = 'block';
@@ -79,18 +79,13 @@ function processPayment() {
 
 function handleSearch(event) {
     const searchTerm = event.target.value.toLowerCase();
-    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm));
+    const filteredProducts = products.filter(({ name }) => name.toLowerCase().includes(searchTerm));
     loadProducts(filteredProducts);
 }
 
 function handleFilter(event) {
     const category = event.target.dataset.category;
-    if (category === 'all') {
-        loadProducts(products);
-    } else {
-        const filteredProducts = products.filter(product => product.category === category);
-        loadProducts(filteredProducts);
-    }
+    loadProducts(category === 'all' ? products : products.filter(({ category: productCategory }) => productCategory === category));
 }
 
 function addProduct(event) {
@@ -101,10 +96,10 @@ function addProduct(event) {
 
     const newProduct = {
         id: productIdCounter++,
-        name: name,
-        price: price,
+        name,
+        price,
         image: `https://via.placeholder.com/150?text=${name}`,
-        category: category
+        category
     };
 
     products.push(newProduct);
@@ -116,13 +111,13 @@ function addProduct(event) {
 function loadAdminProductList() {
     const adminProductList = document.getElementById('admin-product-list');
     adminProductList.innerHTML = '';
-    products.forEach(product => {
+    products.forEach(({ id, name, price }) => {
         const productDiv = document.createElement('div');
         productDiv.className = 'admin-product';
         productDiv.innerHTML = `
-            <span>${product.name} - $${product.price.toFixed(2)}</span>
-            <button onclick="editProduct(${product.id})">Modificar</button>
-            <button onclick="deleteProduct(${product.id})">Eliminar</button>
+            <span>${name} - $${price.toFixed(2)}</span>
+            <button onclick="editProduct(${id})">Modificar</button>
+            <button onclick="deleteProduct(${id})">Eliminar</button>
         `;
         adminProductList.appendChild(productDiv);
     });
@@ -142,10 +137,7 @@ function editProduct(productId) {
 }
 
 function deleteProduct(productId) {
-    const productIndex = products.findIndex(p => p.id === productId);
-    if (productIndex > -1) {
-        products.splice(productIndex, 1);
-        loadProducts(products);
-        loadAdminProductList();
-    }
+    products = products.filter(p => p.id !== productId);
+    loadProducts(products);
+    loadAdminProductList();
 }
