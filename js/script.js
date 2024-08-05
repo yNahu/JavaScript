@@ -1,9 +1,10 @@
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentProducts = products;
 let productIdCounter = products.length + 1;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts(products);
+    updateCartCount();
     document.getElementById('cart').addEventListener('click', showCart);
     document.querySelector('.close').addEventListener('click', closeModal);
     document.getElementById('pay-button').addEventListener('click', processPayment);
@@ -37,6 +38,7 @@ function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     cart.push(product);
     updateCartCount();
+    saveCart();
 }
 
 function updateCartCount() {
@@ -63,6 +65,7 @@ function removeFromCart(index) {
     cart.splice(index, 1);
     showCart();
     updateCartCount();
+    saveCart();
 }
 
 function closeModal() {
@@ -74,6 +77,7 @@ function processPayment() {
     alert('Pago procesado con éxito');
     cart = [];
     updateCartCount();
+    saveCart();
     closeModal();
 }
 
@@ -140,4 +144,8 @@ function deleteProduct(productId) {
     products = products.filter(p => p.id !== productId);
     loadProducts(products);
     loadAdminProductList();
+}
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
